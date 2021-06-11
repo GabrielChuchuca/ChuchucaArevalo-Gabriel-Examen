@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Pedidos</title>
+	<style>
+		.tabla {
+			border-collapse: collapse;
+		}
+		
+		.cabeceraTabla {
+			text-align: center;
+			background: none repeat scroll 0 0 #E5E5E5;
+			border-bottom: 1px solid #BBBBBB;
+			padding: 8px;
+		}
+		
+		.filaPar {
+			text-align: center;
+			background: none repeat scroll 0 0 #FFFFFFF;
+			border-top: 1px solid #BBBBBB;
+		}
+		
+		.filaImpar {
+			text-align: center;
+			background: none repeat scroll 0 0 #F9F9F9;
+			border-top: 1px solid #BBBBBB;
+		}
+	</style>
+</h:head>
+<h:body>
+	<h3>Gestión de categorias</h3>
+	<h:form>
+		<h:dataTable value="#{pedidoBean.list}" var="p" styleClass="tabla"
+			headerClass="cabeceraTabla" rowClasses="filaPar,filaImpar">
+			<h:column>
+				<f:facet name="header">Codigo</f:facet>#{p.numero}</h:column>
+			<h:column>
+				<f:facet name="header">NombreCiente</f:facet>
+				<h:inputText value="#{p.nombreCliente}" size="10"
+					rendered="#{p.editable}" />
+				<h:outputText value="#{p.nombreCliente}" rendered="#{not p.editable}" />
+			</h:column>		
+			<h:column>
+				<f:facet name="header">Subtotal</f:facet>
+				<h:inputText value="#{p.subtotal}"
+					rendered="#{p.editable}" />
+				<h:outputText value="#{p.subtotal}" rendered="#{not p.editable}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">iva</f:facet>
+				<h:inputText value="#{p.iva}" size="10"
+					rendered="#{p.editable}" />
+				<h:outputText value="#{p.iva}" rendered="#{not p.editable}" />
+			</h:column>		
+			<h:column>
+				<f:facet name="header">total</f:facet>
+				<h:inputText value="#{p.total}" size="10"
+					rendered="#{p.editable}" />
+				<h:outputText value="#{p.total}" rendered="#{not p.editable}" />
+			</h:column>		
+			<h:column>
+				<f:facet name="header">observaciones</f:facet>
+				<h:inputText value="#{p.observaciones}" size="10"
+					rendered="#{p.editable}" />
+				<h:outputText value="#{p.observaciones}" rendered="#{not p.editable}" />
+			</h:column>	
+			<h:column>
+				<f:facet name="header">Accion</f:facet>
+				<h:commandLink value="Delete" action="#{pedidoBean.delete(c)}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Accion</f:facet>
+				<h:commandLink value="Edit" action="#{pedidoBean.edit(c)}"
+					rendered="#{not c.editable}" />
+				<h:commandLink value="Save" action="#{pedidoBean.save(c)}"
+					rendered="#{c.editable}" />
+			</h:column>
+		</h:dataTable>
+		<ul>
+			<li>Nombre:<h:inputText value="#{pedidoBean.nombreCliente}"/></li>
+		</ul>
+		<ul>
+			<li>subtotal:<h:inputText value="#{pedidoBean.subtotal}"/></li>
+		</ul>
+		<ul>
+			<li>iva:<h:inputText value="#{pedidoBean.iva}"/></li>
+		</ul>
+		<ul>
+			<li>total:<h:inputText value="#{pedidoBean.total}"/></li>
+		</ul>
+		<ul>
+			<li>observaciones:<h:inputText value="#{pedidoBean.observaciones}"/></li>
+		</ul>
+		<h:commandButton value="Add" action="#{pedidoBean.add}" />
+	</h:form>
+</h:body>
+</html>

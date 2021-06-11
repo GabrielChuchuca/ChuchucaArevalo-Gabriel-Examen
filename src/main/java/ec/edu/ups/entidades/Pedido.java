@@ -24,6 +24,9 @@ public class Pedido implements Serializable {
 	private double total;
 	private String observaciones;
 	
+	@Transient
+	private boolean editable;
+	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<Comidas> comidas;
 	
@@ -34,18 +37,18 @@ public class Pedido implements Serializable {
 		//super();
 	}
 
-	public Pedido(int numero, LocalDate fecha, String nombreCliente, double subtotal, double iva, double total,
-			String observaciones, List<Comidas> comidas, TarjetaCredito tarjetaCredito) {
-		super();
-		this.numero = numero;
-		this.fecha = fecha;
+	public Pedido(String nombreCliente, double subtotal, double iva, double total,
+			String observaciones) {
+		//super();
+		//this.numero = numero;
+		//this.fecha = fecha;
 		this.nombreCliente = nombreCliente;
 		this.subtotal = subtotal;
 		this.iva = iva;
 		this.total = total;
 		this.observaciones = observaciones;
-		this.comidas = comidas;
-		this.tarjetaCredito = tarjetaCredito;
+		//this.comidas = comidas;
+		//this.tarjetaCredito = tarjetaCredito;
 	}
 
 	/**
@@ -172,6 +175,22 @@ public class Pedido implements Serializable {
 	 */
 	public void setTarjetaCredito(TarjetaCredito tarjetaCredito) {
 		this.tarjetaCredito = tarjetaCredito;
+	}
+	
+	
+
+	/**
+	 * @return the editable
+	 */
+	public boolean isEditable() {
+		return editable;
+	}
+
+	/**
+	 * @param editable the editable to set
+	 */
+	public void setEditable(boolean editable) {
+		this.editable = editable;
 	}
 
 	@Override
